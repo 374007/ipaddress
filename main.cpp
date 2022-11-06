@@ -2,7 +2,7 @@
 
 bool valid_octet (std::string octet) {
     bool result = true;
-    if (octet.length() <= 3 && octet != "") {
+    if (octet.length() <= 3 && !octet.empty()) {
         for (int i = 0; i < octet.length(); i++) {
             if (octet[i] < '0' || octet[i] > '9') {
                 result = false;
@@ -21,30 +21,30 @@ bool valid_octet (std::string octet) {
 
 std::string get_address_part (std::string ip, int i) {
     int index = 0;
-    std::string octet = "" ;
-    for (int j = 0; j < ip.length(); j++ )
-    {
+    std::string octet;
+    for (int j = 0; j < ip.length(); j++ ) {
         if (ip[j] >= '0' && ip[j] <= '9') {
-            octet += ip [j];
+            octet += ip[j];
         }
-        else if ( ip[j] == '.') {
-           if ( j == 0 || j == ip.length()-1 || index == 3 || octet=="") {
-               octet = "-";
-               break;
-           }
-           if (index == i) break;
-           else {
-               index++;
-               octet = "";
-           }
+        else if (ip[j] == '.') {
+            if ( j == 0 || index == 3 || octet == "" ) {
+                octet = "";
+                break;
+            }
+            if (index == i) break;
+            else {
+              index++ ;
+              octet = "";
+            }
         }
         else {
-           octet = "-" ;
-           break;
+            octet = "";
+            break;
         }
     }
-    if (valid_octet (octet))  return octet ;
-    else return "-";
+    valid_octet (octet) ? octet : octet = "";
+    return octet;
+
 }
 
 int main() {
@@ -52,15 +52,12 @@ int main() {
     bool valid = true;
     std::cout << "Input IP Address!" << std::endl;
     std::cin >> ip;
-    for (int i = 0; i < 3 ; i++) {
-        if (get_address_part(ip, i) == "-") {
+    for (int i = 1; i < 4 ; i++) {
+        if (get_address_part(ip, i).empty()) {
             valid = false;
             break;
         }
     }
-    if ( valid ) std::cout << "VALID!!!"<<"\n";
-    else  std::cout << "NOT VALID!!!"<<"\n";
-
-
+    valid ? std::cout << "VALID!!!"<<"\n" : std::cout << "NOT VALID!!!"<<"\n";
     return 0;
 }
