@@ -58,8 +58,8 @@ int main() {
             break;
         }
     }
-    if ( valid ) std::cout << "VALID!"<<"\n";
-    else  std::cout << "NOT VALID!"<<"\n";
+    if ( valid ) std::cout << "VALID!!!"<<"\n";
+    else  std::cout << "NOT VALID!!!"<<"\n";
 
 
     return 0;
