@@ -10,7 +10,7 @@ bool valid_octet (std::string octet) {
             }
         }
         if (result) {
-            if (std::stoi(octet) == 0 && octet.length() > 1 || std::stoi(octet) < 0 || std::stoi(octet) > 255) {
+            if (std::stoi(octet) == 0 && octet.length() > 1 || std::to_string(std::stoi(octet)).length() != octet.length()  || std::stoi(octet) < 0 || std::stoi(octet) > 255) {
                 result = false;
             }
         }
